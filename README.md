@@ -93,14 +93,23 @@ testbench
 required commands for successfull synthesis are
 
 1. yosys
+
 2.read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib
+
 3.read_verilog encoder.v
+
 4.synth -top modulename
+
 5.dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+
 6.abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
-7.show
+
+7.show modulename --> view --> command palette --> graphviz
+
 8.tee -o report.txt stat -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+
 9.write_verilog -noattr netlist.v
+
 10.exit
 
 code for gatelevel simulation :
