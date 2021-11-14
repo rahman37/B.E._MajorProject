@@ -12,6 +12,12 @@ Before getting start plz do install:
 
 2.vscode download link-https://code.visualstudio.com/download (also extentions i.Verilog-HDL/SystemVerilog/Bluespec SystemVerilog and ii.Graphviz Preview).
 
+all Required Codes for Simulation
+
+iverilog modulename.v testbenchname.v vvp a.out
+
+gtkwave name.vcd #Module-2
+
 Lets Get Started
 
 Step-1
