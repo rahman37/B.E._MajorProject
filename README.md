@@ -114,28 +114,28 @@ NOTE:  1. here modulename.vcd is a file that is generated automatically after ex
 
 STEPS TO BE FOLLOWED IN ORDER ARE AS FOLLOWS :- 
 
-1)In terminal Type "yosys" to open yosys tool
+1) In terminal Type "yosys" to open yosys tool
  
-2)Type  "read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib"
+2) Type  "read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-3)type  "read_verilog yourmodulefile.v"   ==>> this command is use for reading module wirtten in verilog
+3) Type "read_verilog yourmodulefile.v"   ==>> this command is use for reading module wirtten in verilog
 
-4) "synth -top modulename"   ==>> modulename means the name given in the main verilog code file for example "module modulename(i,o)"
+4) Type "synth -top modulename"   ==>> modulename means the name given in the main verilog code file for example "module modulename(i,o)"
 
 5) For mapping flip-flops to library use following command : "dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
 
 6) For mapping logic to library file use following command : "abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-7) for downloading netlist file type : "show"
+7) For downloading netlist file type : "show"
 
-8) now use following command : "tee -o report.txt stat -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
+8) Now use following command : "tee -o report.txt stat -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-9) we are done with synthesys now we need to download netlist.v file by typing : "write_verilog -noattr netlist.v"  ==>> netlist is file in which we write the synthesys file into some sort of file mainly in verilog format
+9) We are done with synthesys now we need to download netlist.v file by typing : "write_verilog -noattr netlist.v"  ==>> netlist is file in which we write the    synthesys file into some sort of file mainly in verilog format
 
-10) now we can exit for yosys tool for tha simply type "exit" and hit enter
+10) Now we can exit for yosys tool for tha simply type "exit" and hit enter
 
 
-NOTE: 1. At the end you will obtain report.txt and netlist.v files
+NOTE: At the end you will obtain report.txt and netlist.v files
        * report.txt file ==>> shows the statistical data of the design made and
         * netlist.v file  ==>>  shows all the detailed information which is required to make a integrated Circuit. (This is the file we give to foundry for making a physical copy)
 
