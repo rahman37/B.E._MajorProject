@@ -96,31 +96,49 @@ testbench
 ![decsnap3](https://user-images.githubusercontent.com/53487992/140599052-3f00eea0-49a6-498e-9c96-5dcea8c22e8d.jpg)
 
 
-required commands for successfull synthesis are
+-->> Steps for Simulation (Functional Simulation)
 
-1. yosys
+1) iverilog modulename testbenchname
 
-2.read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib
+2) vvp a.out
 
-3.read_verilog encoder.v
+3) gtkwave modulename.vcd (GTKWAVE IS JUST A WAVEFORM VIEWER )
 
-4.synth -top modulename
 
-5.dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+ 
+NOTE:  1. here modulename.vcd is a file that is generated automatically after executing vvp ./a.out command
+       2. a.out file is generated automatically after executing the step 1)
+       
+       
+-->> REQUIRED COMMANDS FOR SUCCESSFULL SYNTHESIS ARE
 
-6.abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+STEPS TO BE FOLLOWED IN ORDER ARE AS FOLLOWS :- 
 
-7.show modulename --> view --> command palette --> graphviz
+1)In terminal Type "yosys" to open yosys tool
+ 
+2)Type  "read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-8.tee -o report.txt stat -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+3)type  "read_verilog yourmodulefile.v"   ==>> this command is use for reading module wirtten in verilog
 
-9.write_verilog -noattr netlist.v
+4) "synth -top modulename"   ==>> modulename means the name given in the main verilog code file for example "module modulename(i,o)"
 
-10.exit
+5) For mapping flip-flops to library use following command : "dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-code for gatelevel simulation :
+6) For mapping logic to library file use following command : "abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
 
-1. iverilog netlist.v sky130_fd_sc_hd.v tb.v
+7) for downloading netlist file type : "show"
+
+8) now use following command : "tee -o report.txt stat -liberty sky130_fd_sc_hd__tt_025C_1v80.lib"
+
+9) we are done with synthesys now we need to download netlist.v file by typing : "write_verilog -noattr netlist.v"  ==>> netlist is file in which we write the synthesys file into some sort of file mainly in verilog format
+
+10) now we can exit for yosys tool for tha simply type "exit" and hit enter
+
+
+NOTE: 1. At the end you will obtain report.txt and netlist.v files
+       * report.txt file ==>> shows the statistical data of the design made and
+        * netlist.v file  ==>>  shows all the detailed information which is required to make a integrated Circuit. (This is the file we give to foundry for making a physical copy)
+
 
 
 
