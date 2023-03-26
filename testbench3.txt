@@ -1,0 +1,32 @@
+//test bench for srt division using table lookup
+module srt_div_tbl_lookup_tb;
+reg [11:0] opnds;
+wire [7:0] quot_rem;
+wire ovfl;
+//display variables
+initial
+$monitor ("dvdnd=%b, dvsr=%b, quot=%b, rem=%b, ovfl=%b",
+opnds[11:4], opnds[3:0],
+quot_rem[7:4], quot_rem[3:0], ovfl);
+//apply stimulus
+initial
+begin
+#0 opnds = 9'b000110001;
+#10 opnds = 9'b000111010;
+#10 opnds = 9'b010001011;
+#10 opnds = 9'b011101100;
+#10 opnds = 9'b010100011;
+#10 opnds = 9'b100111101;
+#10 opnds = 9'b110011111;
+#10 opnds = 9'b101010110;
+#10 opnds = 9'b110001101; //overflow
+#10 opnds = 9'b101000101; //overflow
+#10 $stop;
+end
+//instantiate the module into the test bench
+srt_div_tbl_lookup inst1 (
+.opnds(opnds),
+.quot_rem(quot_rem),
+.ovfl(ovfl)
+);
+endmodule
