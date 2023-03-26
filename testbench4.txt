@@ -1,0 +1,74 @@
+//test bench for bcd restoring division
+module div_bcd_tb;
+reg [7:0] a;
+reg [3:0] b;
+reg start;
+wire [7:0] rslt;
+wire cout_quot;
+//display variables
+initial
+$monitor ("a=%b, b=%b, quot_tens=%b, quot_units=%b, rem=%b",
+a, b, {{3{1'b0}}, cout_quot}, rslt[3:0], rslt[7:4]);
+//apply input vectors
+initial
+begin
+#0 start = 1'b0;
+//60 / 7; quot = 8, rem = 4
+a = 8'b0011_1100; b = 4'b0111;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//13 / 5; quot = 2, rem = 3
+#10 a = 8'b0000_1101; b = 4'b0101;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//60 / 7; quot = 8, rem = 4
+#10 a = 8'b0011_1100; b = 4'b0111;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//82 / 6; quot = 13, rem = 4
+#10 a = 8'b0101_0010; b = 4'b0110;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//56 / 7; quot = 8, rem = 0
+#10 a = 8'b0011_1000; b = 4'b0111;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//100 / 7; quot = 14, rem = 2
+#10 a = 8'b0110_0100; b = 4'b0111;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//110 / 7; quot = 15, rem = 5
+#10 a = 8'b0110_1110; b = 4'b0111;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//99 / 9; quot = 11, rem = 0
+#10 a = 8'b0110_0011; b = 4'b1001;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//99 / 8; quot = 12, rem = 3
+#10 a = 8'b0110_0011; b = 4'b1000;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//52 / 5; quot = 10, rem = 2
+#10 a = 8'b0011_0100; b = 4'b0101;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//0 / 5; quot = 0, rem = 0; invalid dividend
+#10 a = 8'b0000_0000; b = 4'b0101;
+#10 start = 1'b1;
+#10 start = 1'b0;
+//86 / 5; overflow; results are indeterminate
+#10 a = 8'b0101_0110; b = 4'b0101;
+#10 start = 1'b1;
+#10 start = 1'b0;
+#10 $stop;
+end
+//instantiate the module into the test bench
+div_bcd inst1 (
+.a(a),
+.b(b),
+.start(start),
+.rslt(rslt),
+.cout_quot(cout_quot)
+);
+endmodule
